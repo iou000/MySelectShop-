@@ -1,4 +1,4 @@
-package com.sparta.springcore;
+package com.sparta.springcore.model;
 
 import lombok.Getter;
 import lombok.Setter;
