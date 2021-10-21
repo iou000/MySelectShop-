@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout() //로그아웃 기능도 허용해줌.
+                .logoutUrl("/user/logout")
                 .permitAll();
     }
 }
