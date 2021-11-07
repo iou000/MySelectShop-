@@ -4,6 +4,7 @@ import com.sparta.springcore.dto.SignupRequestDto;
 import com.sparta.springcore.model.User;
 import com.sparta.springcore.model.UserRole;
 import com.sparta.springcore.repository.UserRepository;
+import com.sparta.springcore.security.UserDetailsImpl;
 import com.sparta.springcore.security.kakao.KakaoOAuth2;
 import com.sparta.springcore.security.kakao.KakaoUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,30 +65,48 @@ public class UserService {
         String nickname = userInfo.getNickname();
         String email = userInfo.getEmail();
 
-        // 우리 DB 에서 회원 Id 와 패스워드
-        // 회원 Id = 카카오 nickname
-        String username = nickname;
-        // 패스워드 = 카카오 Id + ADMIN TOKEN
-        String password = kakaoId + ADMIN_TOKEN;
 
         // DB 에 중복된 Kakao Id 가 있는지 확인
+        // kakaoUser는 db에서 kakaoId를 가진 회원. 없다면 null
         User kakaoUser = userRepository.findByKakaoId(kakaoId)
                 .orElse(null);
 
-        // 카카오 정보로 회원가입
+        // db에 등록된 Kakao Id가 없다면
         if (kakaoUser == null) {
-            // 패스워드 인코딩
-            String encodedPassword = passwordEncoder.encode(password);
-            // ROLE = 사용자
-            UserRole role = UserRole.USER;
+            //카카오 이메일과 동일한 이메일을 가진 회원이 있는지 확인
+            User sameEmailUser = userRepository.findByEmail(email).orElse(null);
+            //카카오 이메일과 동일한 이메일을 가진 회원이 있다면
+            if(sameEmailUser != null){
+                kakaoUser = sameEmailUser;
+                // 카카오 이메일이 db에 저장되어있지 않고, 카카오 이메일과 동일한 이메일 회원이 있는 경우
+                // 카카오 Id를 회원정보에 저장
+                //찾아진 기존 회원 정보에 카카오 Id만 추가해서 저장해준 것임.
+                kakaoUser.setKakaoId(kakaoId);
+                userRepository.save(kakaoUser);
+            }
+            // 같은 이메일을 가진 회원이 없다면
+            else {
+                // 카카오 정보로 회원가입
+                // 회원 Id = 카카오 nickname
+                String username = nickname;
+                // 패스워드 = 카카오 Id + ADMIN TOKEN
+                String password = kakaoId + ADMIN_TOKEN;
+                // 패스워드 인코딩
+                String encodedPassword = passwordEncoder.encode(password);
+                // ROLE = 사용자
+                UserRole role = UserRole.USER;
 
-            kakaoUser = new User(nickname, encodedPassword, email, role, kakaoId);
-            userRepository.save(kakaoUser);
+                kakaoUser = new User(nickname, encodedPassword, email, role, kakaoId);
+                userRepository.save(kakaoUser);
+            }
         }
 
-        // 로그인 처리
-        Authentication kakaoUsernamePassword = new UsernamePasswordAuthenticationToken(username, password);
-        Authentication authentication = authenticationManager.authenticate(kakaoUsernamePassword);
+        //강제 로그인 처리
+        //카카오 로그인이 된 사용자를 로그인 한 사용자로 인식하도록 만듬.
+        //UsernamePasswordAuthenticationToken는 원래 패스워드를 입력해서 username과 password를 통해 스프링 시큐리티가 인증을 하도록 했는데
+        //기존 사용자(카카오이메일과 같은 이메일을 사용하는 기존 사용자)의 패스워드를 알 수 없기 때문에 강제로그인을 처리해줘야함
+        UserDetailsImpl userDetails = new UserDetailsImpl(kakaoUser);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }
