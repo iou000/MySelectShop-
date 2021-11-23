@@ -289,10 +289,11 @@ button {
 }
 
 .pagination {
+    display: flex;
+    justify-content: center;
     margin-top: 12px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 53%;
+    text-align: center;
+    width: 100%;
 }
 
 .folder-active {
@@ -652,7 +653,7 @@ button {
 
     #search-area, #see-area {
         width: 330px;
-        margin: auto;
+        margin: 0 auto;
     }
 
     .nav {
