@@ -138,6 +138,11 @@ function addFolder() {
             $('#container2').removeClass('active');
             alert('성공적으로 등록되었습니다.');
             window.location.reload();
+        },
+        error: function (error){
+            $('#container2').removeClass('active');
+            alert('이미 존재하는 폴더(들) 입니다.');
+            window.location.reload();
         }
     })
 }
