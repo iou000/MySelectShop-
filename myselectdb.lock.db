@@ -1,6 +1,6 @@
 #FileLock
-#Fri Nov 26 15:39:06 UTC 2021
-server=172.29.208.1\:65352
+#Sat Nov 27 23:59:57 KST 2021
 hostName=DESKTOP-NDFU8Q3.mshome.net
+id=17d61e8f656fbcc0f12c5b4c6e7bdd635132bbd48aa
 method=file
-id=17d5ce671cfebca63c836faaf5949327fff6d55d32f
+server=172.29.208.1\:65432
