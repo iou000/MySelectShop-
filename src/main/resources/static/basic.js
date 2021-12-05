@@ -141,7 +141,7 @@ function addFolder() {
         },
         error: function (error){
             $('#container2').removeClass('active');
-            alert('이미 존재하는 폴더(들) 입니다.');
+            alert('이미 존재하는 폴더 입니다.');
             window.location.reload();
         }
     })
