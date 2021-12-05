@@ -1,5 +1,6 @@
 package com.sparta.springcore.service;
 
+import com.sparta.springcore.exception.ApiRequestException;
 import com.sparta.springcore.model.Folder;
 import com.sparta.springcore.model.Product;
 import com.sparta.springcore.model.User;
@@ -45,8 +46,7 @@ public class FolderService {
             Folder folderInDB = folderRepository.findByName(folderName);
             if (folderInDB != null) {
                 // DB 에 중복 폴더명 존재한다면 Exception 발생시킴
-
-                throw new IllegalArgumentException("중복된 폴더명 (" + folderName +") 을 삭제하고 재시도해 주세요!");
+                throw new ApiRequestException("중복된 폴더명 ('" + folderName + "') 을 삭제하고 재시도해 주세요!");
             }
 
             // 2) 폴더를 DB 에 저장

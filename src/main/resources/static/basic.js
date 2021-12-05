@@ -139,10 +139,13 @@ function addFolder() {
             alert('성공적으로 등록되었습니다.');
             window.location.reload();
         },
-        error: function (error){
-            $('#container2').removeClass('active');
-            alert('이미 존재하는 폴더 입니다.');
-            window.location.reload();
+        error: function (response) {
+            // 서버에서 받은 에러 메시지를 노출
+            if (response.responseJSON && response.responseJSON.message) {
+                alert(response.responseJSON.message);
+            } else {
+                alert("알 수 없는 에러가 발생했습니다.");
+            }
         }
     })
 }
