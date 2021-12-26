@@ -1,0 +1,39 @@
+# MySelectShop-
+
+## 구현 화면
+
+![로그인화면](https://user-images.githubusercontent.com/68727627/147414995-212ce6ff-ad8c-4f6a-aa83-c212a6c9ff08.JPG)
+![회원가입화면](https://user-images.githubusercontent.com/68727627/147415003-a0ff5c09-70cc-422b-a29a-ffeea46392f5.JPG)
+![상품검색](https://user-images.githubusercontent.com/68727627/147415001-f7bfd8fe-97a7-4742-9de8-75a41aead413.JPG)
+![최저가 설정](https://user-images.githubusercontent.com/68727627/147415002-36c8c0b4-7372-4f10-8536-8b39a11ddbdc.JPG)
+![메인1](https://user-images.githubusercontent.com/68727627/147414998-39ffe497-b521-4faa-8cb5-64560c5fa027.JPG)
+![메인화면(폴더)](https://user-images.githubusercontent.com/68727627/147415000-0f9178db-f722-4233-8f6a-e17fb9635bc8.JPG)
+
+로그인 > 회원가입 > 상품검색 > 최저가설정 > 등록한상품 > 상품폴더기능
+
+- 개발환경, 사용 라이브러리
+    
+    spring-boot 2.5.5, lombok, springweb, spring data jpa, spring security, Thymeleaf(뷰 템플릿 엔진), json:20201115, spring-boot-starter-test
+    
+- 개발툴 : IntelliJ
+- main 디렉토리 구조
+
+```bash
+├─aop
+├─controller 
+├─dto
+├─exception
+├─model
+├─repository
+├─security   // 인증 관련
+│  └─kakao
+├─service
+├─testdata   // 초기 실행 시 테스트데이터
+└─util       // 네이버 쇼핑 검색, Validator
+```
+
+- DB
+
+![db](https://user-images.githubusercontent.com/68727627/147414921-d45ebeb6-bd57-4274-869a-ede71c7c96ad.JPG)
+
+- 프로젝트 기능
