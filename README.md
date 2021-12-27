@@ -11,12 +11,13 @@
 
 로그인 > 회원가입 > 상품검색 > 최저가설정 > 등록한상품 > 상품폴더기능
 
-- 개발환경, 사용 라이브러리
+### 개발환경, 사용 라이브러리
     
-    spring-boot 2.5.5, lombok, springweb, spring data jpa, spring security, Thymeleaf(뷰 템플릿 엔진), json:20201115, spring-boot-starter-test
-    
-- 개발툴 : IntelliJ
-- main 디렉토리 구조
+    spring-boot 2.5.5, lombok, springweb, spring data jpa, spring security, Thymeleaf(뷰 템플릿 엔진),json:20201115,
+    spring-boot-starter-test
+#### 개발툴 : IntelliJ
+
+### main 디렉토리 구조
 
 ```bash
 ├─aop
@@ -32,8 +33,25 @@
 └─util       // 네이버 쇼핑 검색, Validator
 ```
 
-- DB
+### **프로젝트 주요 기능**
+    - 인증
+        로그인, 소셜로그인, 회원가입
+    - 상품
+        회원별 등록 상품 조회
+        신규 상품 등록
+        설정 가격 변경
+        등록된 모든 상품 목록 조회(관리자)
+        상품에 폴더 추가
+        네이버 쇼핑 api로 상품 조회
+        
+    - 폴더
+        회원별 등록한 모든 폴더 조회
+        회원별 폴더 추가
+        회원별 등록한 폴더 내 모든 상품 조회
+        
+    - 부가기능(aop)
+        회원별 API수행시간 조회(관리자)
+        
+### **DB**
 
 ![db](https://user-images.githubusercontent.com/68727627/147414921-d45ebeb6-bd57-4274-869a-ede71c7c96ad.JPG)
-
-- 프로젝트 기능
