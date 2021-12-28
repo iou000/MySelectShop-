@@ -52,6 +52,5 @@
     - 부가기능(aop)
         회원별 API수행시간 조회(관리자)
         
-### **DB**
-
-![db](https://user-images.githubusercontent.com/68727627/147414921-d45ebeb6-bd57-4274-869a-ede71c7c96ad.JPG)
+### **ERD**
+![springcoreERD](https://user-images.githubusercontent.com/68727627/147577781-17fea08a-44d2-42a8-a820-cea774f3ee3b.JPG)
